@@ -25,12 +25,34 @@ router = APIRouter()
 deepgram = DeepgramClient(DEEPGRAM_API_KEY)
 
 
-import sounddevice as sd
-import soundfile as sf
+
 from threading import Thread
 
+IS_RENDER = os.environ.get("RENDER", "").lower() == "true"
+
+if not IS_RENDER:
+    try:
+        import sounddevice as sd
+        import soundfile as sf
+        LOCAL_AUDIO_ENABLED = True
+    except ImportError:
+        sd = None
+        sf = None
+        LOCAL_AUDIO_ENABLED = False
+else:
+    sd = None
+    sf = None
+    LOCAL_AUDIO_ENABLED = False
+
+
 def speak_text(text: str):
-    """Speak text locally on the server using Deepgram TTS + sounddevice."""
+    """Speak text locally on the server using Deepgram TTS + sounddevice.
+    Automatically disabled on Render or headless environments.
+    """
+    
+    if IS_RENDER or not LOCAL_AUDIO_ENABLED:
+        logger.info("🎧 Local audio playback disabled on server.")
+        return
     if not text.strip():
         return
 
