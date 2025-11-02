@@ -1,0 +1,39 @@
+# openapi.yaml (slice)
+openapi: 3.0.3
+info: { title: SerVoice Care Ops API, version: 0.1.0 }
+paths:
+  /applicants:
+    get:
+      summary: List applicants
+      parameters:
+        - in: query; name: status; schema: {type: string, enum: [active, inactive, all], default: active}
+        - in: query; name: updated_since; schema: {type: string, format: date-time}
+        - in: query; name: page; schema: {type: integer, default: 1, minimum: 1}
+        - in: query; name: page_size; schema: {type: integer, default: 50, maximum: 200}
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Applicant"
+                  next_page: { type: integer, nullable: true }
+components:
+  schemas:
+    Applicant:
+      type: object
+      required: [id, first_name, last_name, status, created_at]
+      properties:
+        id: { type: string }
+        first_name: { type: string }
+        last_name: { type: string }
+        phone: { type: string, nullable: true }
+        email: { type: string, nullable: true }
+        status: { type: string }
+        created_at: { type: string, format: date-time }
+        tags: { type: array, items: { type: string } }

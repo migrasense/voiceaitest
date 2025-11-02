@@ -1,0 +1,35 @@
+{
+    "results": [
+      {
+        "id": "a_1001",
+        "first_name": "Janelle",
+        "last_name": "Nguyen",
+        "phone": "+1-555-0101",
+        "email": "janelle@example.com",
+        "status": "active",
+        "created_at": "2025-08-28T14:03:00Z",
+        "tags": ["CNA", "Nights", "Bilingual:ES"]
+      },
+      {
+        "id": "a_1002",
+        "first_name": "Marco",
+        "last_name": "Delgado",
+        "phone": "+1-555-0102",
+        "email": "marco@example.com",
+        "status": "inactive",
+        "created_at": "2025-07-11T10:12:00Z",
+        "tags": ["HHA", "Weekends"]
+      },
+      {
+        "id": "a_1003",
+        "first_name": "Ari",
+        "last_name": "Fischer",
+        "phone": null,
+        "email": "ari@example.com",
+        "status": "active",
+        "created_at": "2025-09-01T08:30:00Z",
+        "tags": []
+      }
+    ]
+  }
+  
